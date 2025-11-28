@@ -25,13 +25,20 @@ class HeroPlane:
         self.bomb_frames = assets.hero_blowup
         self.frame_counter = 0
         self.bomb_frame_index = 0
+        # New health and score system
+        self.health = constants.HERO_MAX_HEALTH
+        self.score = 0
 
     @property
     def rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
 
-    def bomb(self) -> None:
-        self.hit = True
+    def take_damage(self) -> None:
+        """Take 1 damage and handle game over if health reaches 0."""
+        if not self.hit:  # Prevent multiple damage while exploding
+            self.health -= 1
+            if self.health <= 0:
+                self.hit = True
 
     def display(self) -> None:
         if self.hit:
@@ -65,4 +72,8 @@ class HeroPlane:
         if self.hit:
             return
         self.bullets.append(Bullet(self.x, self.y, self.screen, self.assets.bullet))
+    
+    def add_score(self, amount: int) -> None:
+        """Add score when enemy is destroyed."""
+        self.score += amount
 
