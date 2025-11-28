@@ -1,0 +1,15 @@
+"""Centralised constants for game configuration."""
+
+import pygame
+
+SCREEN_WIDTH = 480
+SCREEN_HEIGHT = 650
+SCREEN_RECT = pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+HERO_SPEED = 8
+ENEMY_SPEED = 5
+BULLET_SPEED = 18
+ENEMY_BULLET_SPEED = 12
+ENEMY_SHOOT_ODDS = (10, 20)
+FPS = 60
+
