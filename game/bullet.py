@@ -2,7 +2,7 @@
 
 import pygame
 
-from .constants import BULLET_SPEED, ENEMY_BULLET_SPEED, SCREEN_RECT
+from .constants import HERO_BULLET_SPEED, ENEMY_BULLET_SPEED, SCREEN_RECT
 
 
 class Bullet:
@@ -16,8 +16,8 @@ class Bullet:
     def rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
 
-    def move(self) -> None:
-        self.y -= BULLET_SPEED
+    def move(self, dt: float = 1.0) -> None:
+        self.y -= HERO_BULLET_SPEED * dt
 
     def display(self) -> None:
         self.screen.blit(self.image, (self.x, self.y))
@@ -37,8 +37,8 @@ class EnemyBullet:
     def rect(self) -> pygame.Rect:
         return pygame.Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
 
-    def move(self) -> None:
-        self.y += ENEMY_BULLET_SPEED
+    def move(self, dt: float = 1.0) -> None:
+        self.y += ENEMY_BULLET_SPEED * dt
 
     def display(self) -> None:
         self.screen.blit(self.image, (self.x, self.y))

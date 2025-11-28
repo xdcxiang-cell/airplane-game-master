@@ -6,22 +6,11 @@ from pygame.locals import K_LEFT, K_RIGHT, K_SPACE, K_a, K_d, KEYDOWN, QUIT
 from .hero import HeroPlane
 
 
-def key_control(hero: HeroPlane) -> None:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            raise SystemExit
-        if event.type == KEYDOWN:
-            if event.key in (K_a, K_LEFT):
-                hero.move_left()
-            elif event.key in (K_d, K_RIGHT):
-                hero.move_right()
-            elif event.key == K_SPACE:
-                hero.shoot()
-
+def key_control(hero: HeroPlane, dt: float = 1.0) -> None:
+    # Note: Event handling is now done in main.py to avoid duplicate processing
     pressed = pygame.key.get_pressed()
     if pressed[K_LEFT] or pressed[K_a]:
-        hero.move_left()
+        hero.move_left(dt)
     if pressed[K_RIGHT] or pressed[K_d]:
-        hero.move_right()
+        hero.move_right(dt)
 
