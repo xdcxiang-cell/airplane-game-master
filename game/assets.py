@@ -11,6 +11,8 @@ class GameAssets:
     hero_blowup: list[pygame.Surface]
     bullet: pygame.Surface
     enemy: pygame.Surface
+    enemy1: pygame.Surface
+    enemy2: pygame.Surface
     enemy_bullet: pygame.Surface
     background: pygame.Surface
 
@@ -27,7 +29,9 @@ def load_assets() -> GameAssets:
         hero=pygame.image.load("./feiji/hero.gif"),
         hero_blowup=hero_blowup,
         bullet=pygame.image.load("./feiji/bullet-3.gif"),
-        enemy=pygame.image.load("./feiji/enemy-1.gif"),
+        enemy=pygame.image.load("./feiji/enemy-1.gif"),  # Small enemy
+        enemy1=pygame.image.load("./feiji/enemy-2.gif"),  # Medium enemy
+        enemy2=pygame.image.load("./feiji/enemy-3.gif"),  # Large enemy
         enemy_bullet=pygame.image.load("./feiji/bullet1.png"),
         background=pygame.image.load("./feiji/background.png"),
     )
