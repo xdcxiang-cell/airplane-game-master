@@ -4,17 +4,25 @@ from .enemy import EnemyPlane
 from .hero import HeroPlane
 
 
-def handle_collisions(hero: HeroPlane, enemy: EnemyPlane) -> None:
+def handle_collisions(hero: HeroPlane, enemies: list[EnemyPlane]) -> None:
     """检测敌我子弹碰撞, 并触发相应效果。"""
-    for bullet in list(hero.bullets):
-        if bullet.rect.colliderect(enemy.rect):
-            hero.bullets.remove(bullet)
-            enemy.reset_position()
-            break
+    for enemy in enemies:
+        if enemy.is_blowing_up:
+            continue
 
-    for bullet in list(enemy.bullets):
-        if bullet.rect.colliderect(hero.rect):
-            hero.bomb()
-            enemy.bullets.remove(bullet)
-            break
+        # Hero bullets hitting enemy
+        for bullet in list(hero.bullets):
+            if bullet.rect.colliderect(enemy.rect):
+                hero.bullets.remove(bullet)
+                enemy.take_damage()
+                if enemy.hp <= 0:
+                    hero.add_score(enemy.score)
+                break
+
+        # Enemy bullets hitting hero
+        for bullet in list(enemy.bullets):
+            if bullet.rect.colliderect(hero.rect):
+                hero.take_damage()
+                enemy.bullets.remove(bullet)
+                break
 
